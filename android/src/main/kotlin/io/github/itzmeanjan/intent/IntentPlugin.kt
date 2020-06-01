@@ -26,7 +26,9 @@ class IntentPlugin(private val registrar: Registrar, private val activity: Activ
     companion object {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-         
+                    if(registrar.activity() == null){
+                    return;
+                    }
             val channel = MethodChannel(registrar.messenger(), "intent")
             channel.setMethodCallHandler(IntentPlugin(registrar, registrar.activity()))
         }
